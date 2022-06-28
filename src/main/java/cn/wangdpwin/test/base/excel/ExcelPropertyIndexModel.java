@@ -33,4 +33,60 @@ public class ExcelPropertyIndexModel extends BaseRowModel {
 
     @ExcelProperty(value = "备注",index = 6)
     private String last;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getSax() {
+        return sax;
+    }
+
+    public void setSax(String sax) {
+        this.sax = sax;
+    }
+
+    public String getHeigh() {
+        return heigh;
+    }
+
+    public void setHeigh(String heigh) {
+        this.heigh = heigh;
+    }
+
+    public String getLast() {
+        return last;
+    }
+
+    public void setLast(String last) {
+        this.last = last;
+    }
 }

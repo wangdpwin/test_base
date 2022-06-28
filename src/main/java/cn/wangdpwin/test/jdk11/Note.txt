@@ -1,0 +1,13 @@
+单命令运行 Java
+java Main.java
+
+免费的飞行记录器
+商业版 JDK 中一直有一款低开销的事件信息收集工具，也就是飞行记录器（Java Flight Recorder），它可以对 JVM 进行检查、分析、记录等。当出现未知异常时可以通过记录进行故障分析。这个好用的工具在 Java 11 中将开源免费。所有人都可以使用这个功能了。
+
+
+JEP 309 - 添加动态文件常量。
+JEP 318 - 添加 Epsilon 垃圾收集器。
+JEP 320 - 删除 Java EE 和 corba 模块（java.xml.ws, java.xml.bind, java.activation, java.xml.ws.annotation, java.corba, java.transaction, java.se.ee, jdk.xml.ws, jdk.xml.bind）。
+JEP 329 - 增加加密算法 chacha20,poly1305 的实现。
+JEP 333 - 引入实验性的 ZGC 垃圾收集器，保证停摆时间不会超过 10ms。
+JEP 335 - 废弃 Nashorn JavaScript 引擎

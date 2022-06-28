@@ -4,14 +4,11 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.maxBy;
 import static java.util.stream.Collectors.summarizingInt;
 
+import cn.wangdpwin.test.base.model.User;
 import com.alibaba.fastjson.JSON;
-import com.example.test.model.User;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
+
 import org.junit.Test;
 
 /**

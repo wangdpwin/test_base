@@ -1,0 +1,83 @@
+重新实现 Socket API
+java.net.Socket 和 java.net.ServerSocket 类早在 Java 1.0 时就已经引入了，它们的实现的 Java 代码和 C 语言代码的混合，维护和调试都十分不易；而且这个实现还存在并发问题，有时候排查起来也很困难。
+
+因此，在 Java 13 中引入了新的实现方式，使用了新的实现 NioSocketImpl 来代替老旧的 PlainSocketImpl 实现。虽然功能相同，但是老的方式在当前以及未来几个版本内不会删除，用户随时可以通过 -Djdk.net.usePlainSocketImpl 参数切换回老的实现方式，以兼容意外情况。
+
+编写一个测试类可以发现这个变化。
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+public class Test {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(8000)){
+            boolean running = true;
+            while(running){
+                Socket clientSocket = serverSocket.accept();
+                //do something with clientSocket
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+使用 Java 13 运行，通过参数 -XX:+TraceClassLoading 追踪加载的类，日志中可以看到 NioSocketImpl。
+
+➜  develop ./jdk-13.0.2.jdk/Contents/Home/bin/java -XX:+TraceClassLoading Test.java | grep SocketImpl
+[0.699s][info   ][class,load] java.net.SocketImpl source: jrt:/java.base
+[0.699s][info   ][class,load] java.net.SocketImpl$$Lambda$173/0x0000000800c37440 source: java.net.SocketImpl
+[0.702s][info   ][class,load] sun.net.PlatformSocketImpl source: jrt:/java.base
+[0.702s][info   ][class,load] sun.nio.ch.NioSocketImpl source: jrt:/java.base
+[0.713s][info   ][class,load] sun.nio.ch.NioSocketImpl$FileDescriptorCloser source: jrt:/java.base
+但在 Java 12 并不是 NioSocketImpl。
+
+➜  develop ./jdk-12.0.2.jdk/Contents/Home/bin/java -XX:+TraceClassLoading Test.java | grep SocketImpl
+[0.665s][info   ][class,load] java.net.SocketImpl source: jrt:/java.base
+[0.665s][info   ][class,load] java.net.AbstractPlainSocketImpl source: jrt:/java.base
+[0.665s][info   ][class,load] java.net.PlainSocketImpl source: jrt:/java.base
+[0.665s][info   ][class,load] java.net.SocksSocketImpl source: jrt:/java.base
+[0.666s][info   ][class,load] java.net.AbstractPlainSocketImpl$1 source: jrt:/java.base
+
+
+文本块 (预览)
+在这之前，如果我们把一个 JSON 赋值给字符串：
+
+String content = "{\n"
+    + "    \"upperSummary\": null,\n"
+    + "    \"sensitiveTypeList\": null,\n"
+    + "    \"gmtModified\": \"2011-08-05 10:50:09\",\n"
+    + "    \"lowerGraph\": null,\n"
+    + "    \"signature\": \"\",\n"
+    + "    \"appName\": \"xxx\",\n"
+    + "    \"lowerSummary\": null,\n"
+    + "    \"gmtCreate\": \"2011-08-05 10:50:09\",\n"
+    + "    \"type\": \"CALL\",\n"
+    + "    \"name\": \"xxxx\",\n"
+    + "    \"subType\": \"yyy\",\n"
+    + "    \"id\": 1,\n"
+    + "    \"projectId\": 1,\n"
+    + "    \"status\": 1\n"
+    + "}";
+终于不用写丑陋的长字符串了，从 Java 13 开始你可以使用文本块的方式定义字符串了。
+
+String content2 = """
+        {
+        "upperSummary": null,
+        "sensitiveTypeList": null,
+        "gmtModified": "2011-08-05 10:50:09",
+        "lowerGraph": null,
+        "signature": "",
+        "appName": "xxx",
+        "lowerSummary": null,
+        "gmtCreate": "2011-08-05 10:50:09",
+        "type": "CALL",
+        "name": "xxxx",
+        "subType": "yyy",
+        "id": 1,
+        "projectId": 1,
+        "status": 1
+    };
+
+不过这是一个预览功能，如果你要是在 Java 13 中使用需要手动开启预览功能，这个功能在 Java 15 中正式发布。
+
+

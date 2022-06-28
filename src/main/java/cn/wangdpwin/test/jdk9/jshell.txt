@@ -1,0 +1,86 @@
+C:\Users>jshell
+|  欢迎使用 JShell -- 版本 9
+|  要大致了解该版本, 请键入: /help intro
+jshell> /help
+|  键入 Java 语言表达式, 语句或声明。
+|  或者键入以下命令之一:
+|  /list [<名称或 id>|-all|-start]
+|       列出您键入的源
+|  /edit <名称或 id>
+|       编辑按名称或 id 引用的源条目
+|  /drop <名称或 id>
+|       删除按名称或 id 引用的源条目
+|  /save [-all|-history|-start] <文件>
+|       将片段源保存到文件。
+|  /open <file>
+|       打开文件作为源输入
+|  /vars [<名称或 id>|-all|-start]
+|       列出已声明变量及其值
+|  /methods [<名称或 id>|-all|-start]
+|       列出已声明方法及其签名
+|  /types [<名称或 id>|-all|-start]
+|       列出已声明的类型
+|  /imports
+|       列出导入的项
+|  /exit
+|       退出 jshell
+|  /env [-class-path <路径>] [-module-path <路径>] [-add-modules <模块>] ...
+|       查看或更改评估上下文
+|  /reset [-class-path <路径>] [-module-path <路径>] [-add-modules <模块>]...
+|       重启 jshell
+|  /reload [-restore] [-quiet] [-class-path <路径>] [-module-path <路径>]...
+|       重置和重放相关历史记录 -- 当前历史记录或上一个历史记录 (-restore)
+|  /history
+|       您键入的内容的历史记录
+|  /help [<command>|<subject>]
+|       获取 jshell 的相关信息
+|  /set editor|start|feedback|mode|prompt|truncation|format ...
+|       设置 jshell 配置信息
+|  /? [<command>|<subject>]
+|       获取 jshell 的相关信息
+|  /!
+|       重新运行上一个片段
+|  /<id>
+|       按 id 重新运行片段
+|  /-<n>
+|       重新运行前面的第 n 个片段
+|
+|  有关详细信息, 请键入 '/help', 后跟
+|  命令或主题的名称。
+|  例如 '/help /list' 或 '/help intro'。主题:
+|
+|  intro
+|       jshell 工具的简介
+|  shortcuts
+|       片段和命令输入提示, 信息访问以及
+|       自动代码生成的按键说明
+|  context
+|       /env /reload 和 /reset 的评估上下文选项
+
+
+jshell> int a =10;
+a ==> 10
+jshell> for(int i=0;i<a;i++){System.out.println(i);}
+
+
+jshell> List list = List.of(1,2,3,4,5);
+list ==> [1, 2, 3, 4, 5]
+jshell> list
+list ==> [1, 2, 3, 4, 5]
+
+jshell> /imports
+|    import java.io.*
+|    import java.math.*
+|    import java.net.*
+|    import java.nio.file.*
+|    import java.util.*
+|    import java.util.concurrent.*
+|    import java.util.function.*
+|    import java.util.prefs.*
+|    import java.util.regex.*
+|    import java.util.stream.*
+
+#  将代码保存到文件并退出。
+jshell> /save d:/JShell.java
+jshell> /exit
+  再见

@@ -1,6 +1,6 @@
 package cn.wangdpwin.test.base.stream;
 
-import com.example.test.model.User;
+import cn.wangdpwin.test.base.model.User;
 import com.google.common.collect.Lists;
 import java.util.Date;
 import java.util.List;
